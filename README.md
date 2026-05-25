@@ -10,6 +10,32 @@ Remember, it's self-paced so feel free to take a break! ☕️
 
 [![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/DevPatel5213/skills-integrate-mcp-with-copilot/issues/1)
 
+## React frontend migration
+
+A new React + TypeScript client is available in [client/](client/). It mirrors the current extracurricular activity flow with:
+
+- a home page listing activities
+- an activity detail route at `/activity/:name`
+- sign up and unregister actions backed by the FastAPI app
+
+### Run locally
+
+Start the backend first:
+
+```bash
+uvicorn src.app:app --reload --port 8000
+```
+
+Then install and run the React client:
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+The Vite dev server proxies API requests to `http://127.0.0.1:8000`.
+
 ---
 
 &copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
