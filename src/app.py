@@ -6,8 +6,8 @@ for extracurricular activities at Mergington High School.
 """
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
 
@@ -18,6 +18,10 @@ app = FastAPI(title="Mergington High School API",
 current_dir = Path(__file__).parent
 app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
+
+client_dist = Path(__file__).resolve().parent.parent / "client" / "dist"
+if client_dist.exists():
+    app.mount("/assets", StaticFiles(directory=client_dist / "assets"), name="client-assets")
 
 # In-memory activity database
 activities = {
@@ -80,6 +84,8 @@ activities = {
 
 @app.get("/")
 def root():
+    if client_dist.joinpath("index.html").exists():
+        return FileResponse(client_dist / "index.html")
     return RedirectResponse(url="/static/index.html")
 
 
